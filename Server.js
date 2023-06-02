@@ -1,24 +1,27 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import AccountRouter from './routes/AccountRouter.js'
+import CustomerRouter from './routes/CustomerRouter.js';
+
 import customers from './data.js';
 import accounts from './data1.js';
 import feedback from './data2.js';
 import loans from './data3.js';
 
 dotenv.config();
- mongoose.connect('mongodb+srv://vijayanagalakshmi14:Myowndatabase@mybank.efhaxf9.mongodb.net/my-newbank')
- .then(() => {
-    console.log('connected to DB');
 
- }).catch(error =>{
-    console.log('failed to connected');
-    handleError(error);
- });
+mongoose.connect(process.env.MONGO_DB_URI).then(() => {
+    console.log('connected to database')
+}).catch(err => {
+    console.log(err);
+})
 
  //---------
 
 const server = express();
+server.use('/api', CustomerRouter);
+server.use('/acc',AccountRouter);
 
 
 server.listen(5500, () => {
