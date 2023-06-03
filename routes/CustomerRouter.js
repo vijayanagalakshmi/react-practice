@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import { Customer } from '../model/customer.js';
 import customers from '../data.js';
 
@@ -21,6 +21,14 @@ CustomerRouter.get('/customerSeed', async (request, response) => {
 CustomerRouter.get('/customers', async (request, response) => {
     const allCustomers = await Customer.find();
     response.send(allCustomers);
+})
+CustomerRouter.get('/customer/:id', async(request,response) =>{
+    try{
+        const cust = await Customer.findOne({_id:request.params.id});
+        response.send(cust);
+    }catch(err){
+        response.send({message:'failed to search the customer record'});
+    }
 })
 
 export default CustomerRouter;
