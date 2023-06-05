@@ -21,4 +21,13 @@ AccountRouter.get('/accountSeed', async (request, response) => {
     response.send(allAccounts);
 })
 
+AccountRouter.get('/account/:id', async(request,response) =>{
+    try{
+        const acc = await Account.findOne({_id:request.params.id});
+        response.send(acc);
+    }catch(err){
+        response.send({message:'failed to search the customer record'});
+    }
+})
+
 export default AccountRouter;

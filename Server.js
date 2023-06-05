@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import AccountRouter from './routes/AccountRouter.js'
 import CustomerRouter from './routes/CustomerRouter.js';
 
-import customers from './data.js';
+//import customers from './data.js';
 import accounts from './data1.js';
 import feedback from './data2.js';
 import loans from './data3.js';
@@ -35,15 +35,21 @@ server.get('/customers', (request, response) => {
     return response.send(customers);
 
 })
-server.get('/customer/id/:custId' , (request , response) => {
-    console.log ('id', request. params);
-    const customer = customers.find(cust => cust.id == request.params.custId);
+/*server.get('/customer/id/:custId' , (request , response) => {
+    console.log ('id', request.params);
+    const customer = customers.find(cust =>{
+    console.log(cust);
+     return (cust.id == request.params.custId);
+    }
+)
+    console.log(customer);
+    
     if(customer) {
         console.log('sending customer details',customer);
         return response.send(customer);
     } else
     return response.status(404).send({message:'customer not found'});
-})
+}) */
 
 server.get('/accounts',(request, response) => {
     return response.send(accounts);
@@ -52,6 +58,7 @@ server.get('/accounts',(request, response) => {
 server.get('/account/id/:accId', (request , response)=>{
     console.log('account id:',request.params);
     const account = accounts.find(acc => acc.id == request.params.accId);
+    console.log(account);
     if(account){
         console.log("sending account details",account);
         return response.send(account);
