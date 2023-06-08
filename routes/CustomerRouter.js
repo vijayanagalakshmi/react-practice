@@ -22,12 +22,27 @@ CustomerRouter.get('/customers', async (request, response) => {
     const allCustomers = await Customer.find();
     response.send(allCustomers);
 })
-CustomerRouter.get('/customer/:id', async(request,response) =>{
+CustomerRouter.get('customer/:id', async(request,response) =>{
     try{
         const cust = await Customer.findOne({_id:request.params.id});
+        console.log(cust);
         response.send(cust);
     }catch(err){
         response.send({message:'failed to search the customer record'});
+    }
+})
+
+CustomerRouter.post('/create', async (req, resp) => {
+    console.log('req body:', req.body);
+    const cust = req.body;
+    try {
+        const createdCustomer = await Customer.create({ cName: cust.cName, email: cust.email });
+        console.log('created customer:', createdCustomer);
+        resp.send(createdCustomer);
+    } catch (err) {
+        console.log("error", err);
+        resp.send({ message: 'Failed to create customer' });
+        
     }
 })
 
