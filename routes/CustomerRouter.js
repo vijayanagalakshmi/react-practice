@@ -22,13 +22,23 @@ CustomerRouter.get('/customers', async (request, response) => {
     const allCustomers = await Customer.find();
     response.send(allCustomers);
 })
-CustomerRouter.get('customer/:id', async(request,response) =>{
+CustomerRouter.get('/customer/:id', async(request,response) =>{
     try{
         const cust = await Customer.findOne({_id:request.params.id});
         console.log(cust);
         response.send(cust);
     }catch(err){
         response.send({message:'failed to search the customer record'});
+    }
+})
+
+CustomerRouter.delete('/customer/:id', async(request,response) =>{
+    try{
+        const deletedCustomer = await Customer.findOneAndDelete({_id:request.params.id});
+        
+        response.send({message: ' Customer with id ' + request.params.id + 'deleted'});
+    }catch(err){
+        response.send({message:'failed to delete the customer record'});
     }
 })
 

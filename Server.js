@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGO_DB_URI).then(() => {
 
 const server = express();
 server.use(express.json());
-server.use('/api/customer', CustomerRouter);
+server.use('/api', CustomerRouter);
 server.use('/acc',AccountRouter);
 
 
@@ -36,7 +36,7 @@ server.get('/customers', (request, response) => {
     return response.send(customers);
 
 })
-/*server.get('/customer/id/:custId' , (request , response) => {
+server.get('/customer/id/:custId' , (request , response) => {
     console.log ('id', request.params);
     const customer = customers.find(cust =>{
     console.log(cust);
@@ -50,7 +50,7 @@ server.get('/customers', (request, response) => {
         return response.send(customer);
     } else
     return response.status(404).send({message:'customer not found'});
-}) */
+}) 
 
 server.get('/accounts',(request, response) => {
     return response.send(accounts);
