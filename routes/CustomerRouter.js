@@ -36,7 +36,7 @@ CustomerRouter.post('/create', async (req, resp) => {
     console.log('req body:', req.body);
     const cust = req.body;
     try {
-        const createdCustomer = await Customer.create({ cName: cust.cName, email: cust.email });
+        const createdCustomer = await Customer.create({ cName: cust.cName, email: cust.email ,cellNo: cust.cellNo});
         console.log('created customer:', createdCustomer);
         resp.send(createdCustomer);
     } catch (err) {
