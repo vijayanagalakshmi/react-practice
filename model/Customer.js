@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 const customerSchema = new mongoose.Schema({
     cName: { type: String, required: true, unique: false },
    cellNo: { type: Number, required: true, unique: true },
-   /*address: {
+   
+    email:{ type: String, required: true, unique: true },
+    /*address: {
         city: { type: String, required: true },
        state: { type: String, required: true },
         zip:{ type: String, required: true}, 
@@ -14,7 +16,6 @@ const customerSchema = new mongoose.Schema({
         balance:{ type: Number,required: true}, 
 
     },*/
-    email:{ type: String, required: true, unique: true },
 }, {
     timestamps: true
 });

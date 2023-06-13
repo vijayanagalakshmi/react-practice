@@ -49,7 +49,7 @@ CustomerRouter.put('/customer/:id', async (request, response) => {
     const cust = request.body;
     const filter = { _id: request.params.id }
     const update = {
-        name: cust.cName,
+        cName: cust.cName,
         email: cust.email,
         password: cust.password,
         cellNo: cust.cellNo,
@@ -58,8 +58,9 @@ CustomerRouter.put('/customer/:id', async (request, response) => {
     try {
         const modCust = await Customer.findOneAndUpdate(filter, update);
         response.send(modCust);
+    
     } catch (err) {
-        response.send({ message: 'Failed to delete customer' });
+        response.send({ message: 'Failed to edit the customer' ,err});
     }
 })
 
@@ -72,7 +73,7 @@ CustomerRouter.post('/customer/create', async (req, resp) => {
         resp.send(createdCustomer);
     } catch (err) {
         console.log("error", err);
-        resp.send({ message: 'Failed to create customer' });
+        resp.send({ message: 'Failed to create customer',err });
 
     }
 })
